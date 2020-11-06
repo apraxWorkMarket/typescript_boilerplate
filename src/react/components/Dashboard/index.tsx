@@ -7,7 +7,13 @@ import actions from '../../../redux/actions';
 import initialState from '../../../redux/state';
 import styles from './styles';
 
-class Dashboard extends Component {
+interface ComponentProps {
+  columns: typeof Map[];
+  dataList: typeof List
+  initialize: typeof List;
+};
+
+class Dashboard extends Component<ComponentProps> {
 	componentDidMount () {
 		const { initialize } = this.props;
 		initialize();
@@ -38,10 +44,13 @@ Dashboard.propTypes = {
 	initialize: PropTypes.func,
 };
 
-const mapStateToProps = (state = initialState) => ({
-	columns: state.bootstrap_4_1_1.Settings.columns,
-	dataList: state.bootstrap_4_1_1.Settings.dataList,
-});
+const mapStateToProps = (state = initialState) => {
+	debugger;
+	return {
+		columns: state.bootstrap_4_1_1.Settings.columns,
+		dataList: state.bootstrap_4_1_1.Settings.dataList,
+	};
+};
 
 const mapDispatchToProps = dispatch => ({
 	initialize: () => dispatch(actions.initialFetch()),

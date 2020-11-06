@@ -1,0 +1,14 @@
+{
+	"extends": "@workmarket/eslint-config",
+	"settings": {
+		"polyfills": [
+			"Promise",
+			"fetch"
+		]
+	},
+	"env": {
+		"browser": true,
+		"node": true,
+		"jest": true
+	}
+}

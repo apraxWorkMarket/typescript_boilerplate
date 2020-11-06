@@ -1,0 +1,52 @@
+{
+	"name": "@workmarket/spa-bootstrap_4_1_1",
+	"version": "0.0.0",
+	"description": "",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/workmarket/spa-bootstrap_4_1_1.git"
+	},
+	"license": "UNLICENSED",
+	"bugs": {
+		"url": "https://github.com/workmarket/spa-bootstrap_4_1_1/issues"
+	},
+	"homepage": "https://github.com/workmarket/spa-bootstrap_4_1_1#readme",
+	"engines": {
+		"node": ">=12.14.0 <13"
+	},
+	"files": [
+		"dist",
+		"dist-es"
+	],
+	"main": "dist/index.js",
+	"module": "dist-es/index.js",
+	"jsnext:main": "dist-es/index.js",
+	"peerDependencies": {
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
+		"redux": "3.7.2"
+	},
+	"devDependencies": {
+		"@types/jest": "26.0.15",
+		"@workmarket/eslint-config": "0.2.0-alpha.1",
+		"@workmarket/front-end-components-next": "5.10.9",
+		"enzyme": "3.11.0",
+		"enzyme-adapter-react-16": "1.15.1",
+		"enzyme-to-json": "3.6.1",
+		"eslint": "7.12.1",
+		"prop-types": "15.7.2",
+		"react": "16.13.1",
+		"react-dom": "16.13.1",
+		"react-redux": "5.0.6",
+		"redux": "3.7.2",
+		"redux-devtools-extension": "2.13.2",
+		"redux-logger": "3.0.6",
+		"redux-mock-store": "1.5.4",
+		"redux-thunk": "2.2.0"
+	},
+	"dependencies": {
+		"@workmarket/theme-provider": "1.2.2",
+		"immutable": "3.8.2",
+		"swagger-client": "3.9.1"
+	}
+}

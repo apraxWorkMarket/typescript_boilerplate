@@ -1,3 +1,16 @@
-import { SET_DATA_LIST } from '../constants';
+import { Action, ActionCreator } from 'redux';
+import CONSTANTS from '../constants';
 
-export default data => ({ type: SET_DATA_LIST, data });
+
+// TODO(aprax) fix Any
+export interface SetDataListActionType extends Action {
+  data: any;
+  type: CONSTANTS.SET_DATA_LIST;
+}
+
+const createSetDataListAction: ActionCreator<SetDataListActionType> = (data: any) => ({
+  data,
+  type: CONSTANTS.SET_DATA_LIST,
+})
+
+export default createSetDataListAction;

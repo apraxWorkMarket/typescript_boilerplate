@@ -1,5 +1,7 @@
-export const SET_DATA_LIST = 'SET_DATA_LIST';
+export enum CONSTANTS {
+  SET_DATA_LIST = 'SET_DATA_LIST',
+  SET_SWAGGER = 'SET_SWAGGER',
+  UPDATE_GLOBAL = 'UPDATE_GLOBAL'
+}
 
-export default {
-	SET_DATA_LIST,
-};
+export default CONSTANTS;

@@ -1,4 +1,6 @@
-export default {
+import { CSSProperties } from "react";
+
+const styles: CSSProperties = {
 	width: '100px',
 	height: '100px',
 	display: 'flex',
@@ -10,4 +12,5 @@ export default {
 	flexDirection: 'row',
 	justifyContent: 'center',
 	alignItems: 'center',
-};
+}
+export default styles;

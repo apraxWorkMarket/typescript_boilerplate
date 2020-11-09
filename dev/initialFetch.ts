@@ -1,4 +1,5 @@
-const initialFetch = async (swaggerClient) => {
+import SwaggerClient from '../src/api/types/SwaggerClient';
+const initialFetch = async (swaggerClient: SwaggerClient) => {
 	const smallUserPromise = swaggerClient.execute({
 		operationId: 'wm_user_dimensions',
 		parameters: {},

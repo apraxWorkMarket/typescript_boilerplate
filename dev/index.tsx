@@ -4,6 +4,7 @@ import {
 	createStore,
 	applyMiddleware,
 	combineReducers,
+  Action,
 } from 'redux';
 import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
@@ -11,21 +12,25 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import reduxThunk from 'redux-thunk';
 import {
 	MuiThemeProvider,
-	createMuiTheme,
+  createMuiTheme,
 } from '@material-ui/core/styles';
 import { workmarketTheme } from '@workmarket/theme-provider';
-import { fromJS } from 'immutable';
+import { fromJS, Map } from 'immutable';
 import ProductionContainer from '../src/Production';
 import featureReducer from '../src/redux/reducers';
 import getSwagger from './swagger';
 import initialFetch from './initialFetch';
+import { State } from '../src/redux/state';
+import { SetDataListActionType } from '../src/redux/actions/setDataList';
+import CONSTANTS from '../src/redux/constants';
+import SwaggerClient from '../src/api/types/SwaggerClient';
 
 const reduxLogger = createLogger({ collapsed: true });
 
-const initialState = fromJS({
+const global: State["Global"] = fromJS({
 	isPerformingInitialLoad: true,
-	swaggerClient: {},
-	user: Promise.resolve({}),
+	swaggerClient: {} as SwaggerClient,
+	user: Promise.resolve({user: 'mockUser', companyId: 'mockCompanyid'}),
 	largeUser: {
 		userInfo: {
 			email: process.env.USERNAME || 'Placeholder_USERNAME',
@@ -34,18 +39,27 @@ const initialState = fromJS({
 	},
 });
 
+const initialState = global;
+
+interface SetSwaggerActionType extends Action {
+  type: CONSTANTS.SET_SWAGGER;
+  swaggerClient: SwaggerClient;
+}
+
+interface UpdateGlobalActionType extends Action {
+  type: CONSTANTS.UPDATE_GLOBAL;
+  initialData: {[index:string]: any};
+}
 const shellStore = createStore(
 	combineReducers({
 		bootstrap_4_1_1: featureReducer,
-		Global: (state = initialState, action) => {
-			if (action.type === 'SET_SWAGGER') {
-				return state.set('swaggerClient', action.swaggerClient);
+		Global: (state: State["Global"] = initialState, action: SetDataListActionType | SetSwaggerActionType | UpdateGlobalActionType) => {
+			if (action.type === CONSTANTS.SET_SWAGGER) {
+				return state!.set('swaggerClient', action.swaggerClient);
 			}
 
-			if (action.type === 'UPDATE_GLOBAL') {
-				return state
-					.merge(action.initialData)
-					.set('isPerformingInitialLoad', false);
+			if (action.type === CONSTANTS.UPDATE_GLOBAL) {
+				return state!.merge(action.initialData).set('isPerformingInitialLoad', false);
 			}
 
 			return state;
@@ -73,7 +87,7 @@ const apiClient = getSwagger()
 		return swaggerClient;
 	});
 
-const theme = createMuiTheme(workmarketTheme.globalTheme);
+const theme = createMuiTheme(workmarketTheme.globalTheme as any);
 
 const dev = () => render(
 	<MuiThemeProvider theme={ theme }>

@@ -1,9 +1,31 @@
-import { fromJS } from 'immutable';
+import { fromJS, List, Map } from 'immutable';
+import SwaggerClient from '../api/types/SwaggerClient';
 
-const state = {
+interface User {
+  user: string;
+  companyId: string;
+}
+
+interface LargeUser {
+  userInfo: {
+    email: 'mockEmail@example.com',
+    fullName: 'mockFullName'
+  }
+}
+export interface State {
+  bootstrap_4_1_1: {
+    Settings: {
+      columns: Map<string, boolean | number | string>[];
+      dataList: List<Map<string, string>>; //TODO(aprax) get type of List
+    },
+  },
+  Global?: Map<string, boolean | SwaggerClient | Promise<User>>;
+}
+
+const state: State["bootstrap_4_1_1"] = {
 	Settings: {
 		columns: [
-			fromJS({
+			Map({
 				type: 'Text',
 				textType: 'header',
 				fixed: true,
@@ -12,7 +34,7 @@ const state = {
 				textLookup: 'name',
 				growPriority: 2,
 			}),
-			fromJS({
+			Map({
 				type: 'Text',
 				textType: 'header',
 				fixed: true,
@@ -21,7 +43,7 @@ const state = {
 				textLookup: 'dimension',
 				growPriority: 1,
 			}),
-			fromJS({
+			Map({
 				type: 'Text',
 				textType: 'header',
 				fixed: true,
@@ -32,7 +54,7 @@ const state = {
 			}),
 		],
 		dataList: fromJS([]),
-	},
+  },
 };
 
 export default state;

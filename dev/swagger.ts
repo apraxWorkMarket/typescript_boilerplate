@@ -1,7 +1,9 @@
+//TODO(aprax) use swagger-ts-client (https://github.com/kjayasa/swagger-ts-client)
+/*@ts-ignore*/
 import Swagger from 'swagger-client';
 import Credentials from '../credentials';
 
-let apiToken;
+let apiToken: string;
 export const API_HOST = process.env.NODE_ENV === 'development' ? 'https://dev.workmarket.com' : '';
 
 const SPEC_URL = `${API_HOST}/api-docs/latest`;
@@ -31,7 +33,14 @@ export const getToken = async () => {
 	return apiToken;
 };
 
-const requestInterceptor = async (originalReq) => {
+const requestInterceptor = async (originalReq: {
+    credentials: string;
+  headers: {
+    Authorization: string;
+    'Content-Type': string;
+  };
+  url: string;
+}) => {
 	const req = originalReq;
 	let token;
 
@@ -47,7 +56,7 @@ const requestInterceptor = async (originalReq) => {
 	return req;
 };
 
-Swagger.prototype.http = obj => Swagger.http({
+Swagger.prototype.http = (obj: any) => Swagger.http({
 	requestInterceptor,
 	...obj,
 });

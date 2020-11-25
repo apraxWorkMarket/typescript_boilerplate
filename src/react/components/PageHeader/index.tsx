@@ -6,7 +6,7 @@ const PageHeader = () => (
 	<div style={ styles }>
 		<WMPageHeader
 			routes={ [
-				{ label: 'User Settings' },
+				{ label: 'User Skyrim Settings' },
 			] }
 		/>
 	</div>

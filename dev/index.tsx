@@ -4,7 +4,6 @@ import {
 	createStore,
 	applyMiddleware,
 	combineReducers,
-  Action,
 } from 'redux';
 import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
@@ -14,75 +13,41 @@ import {
 	MuiThemeProvider,
   createMuiTheme,
 } from '@material-ui/core/styles';
+import createSagaMiddleware from 'redux-saga';
 import { workmarketTheme } from '@workmarket/theme-provider';
-import { fromJS, Map } from 'immutable';
 import ProductionContainer from '../src/Production';
 import featureReducer from '../src/redux/reducers';
 import getSwagger from './swagger';
 import initialFetch from './initialFetch';
-import { State } from '../src/redux/state';
-import { SetDataListActionType } from '../src/redux/actions/setDataList';
-import CONSTANTS from '../src/redux/constants';
-import SwaggerClient from '../src/api/types/SwaggerClient';
+import createSetSwaggerAction from './redux/Global/actions/setSwagger';
+import createUpdateGlobalAction from './redux/Global/actions/updateGlobal';
+import globalReducer from './redux/Global/reducers';
+import rootSaga from '../src/redux/sagas'
 
 const reduxLogger = createLogger({ collapsed: true });
 
-const global: State["Global"] = fromJS({
-	isPerformingInitialLoad: true,
-	swaggerClient: {} as SwaggerClient,
-	user: Promise.resolve({user: 'mockUser', companyId: 'mockCompanyid'}),
-	largeUser: {
-		userInfo: {
-			email: process.env.USERNAME || 'Placeholder_USERNAME',
-			fullName: process.env.FULLNAME || 'Placeholder_FULLNAME',
-		},
-	},
-});
 
-const initialState = global;
 
-interface SetSwaggerActionType extends Action {
-  type: CONSTANTS.SET_SWAGGER;
-  swaggerClient: SwaggerClient;
-}
-
-interface UpdateGlobalActionType extends Action {
-  type: CONSTANTS.UPDATE_GLOBAL;
-  initialData: {[index:string]: any};
-}
+const sagaMiddlware = createSagaMiddleware();
 const shellStore = createStore(
 	combineReducers({
-		bootstrap_4_1_1: featureReducer,
-		Global: (state: State["Global"] = initialState, action: SetDataListActionType | SetSwaggerActionType | UpdateGlobalActionType) => {
-			if (action.type === CONSTANTS.SET_SWAGGER) {
-				return state!.set('swaggerClient', action.swaggerClient);
-			}
-
-			if (action.type === CONSTANTS.UPDATE_GLOBAL) {
-				return state!.merge(action.initialData).set('isPerformingInitialLoad', false);
-			}
-
-			return state;
-		},
+		typescript_boilerplate: featureReducer,
+		Global: globalReducer,
 	}),
-	composeWithDevTools(applyMiddleware(reduxThunk, reduxLogger)),
+	composeWithDevTools(applyMiddleware(reduxThunk, reduxLogger, sagaMiddlware)),
 );
+
+sagaMiddlware.run(rootSaga);
 
 const apiClient = getSwagger()
 	.then((swaggerClient) => {
-		shellStore.dispatch({
-			type: 'SET_SWAGGER',
-			swaggerClient,
-		});
+		shellStore.dispatch(createSetSwaggerAction(swaggerClient));
 		return swaggerClient;
 	})
 	.then((swaggerClient) => {
 		initialFetch(swaggerClient)
-			.then((initialData) => {
-				shellStore.dispatch({
-					type: 'UPDATE_GLOBAL',
-					initialData,
-				});
+			.then((initialState) => {
+				shellStore.dispatch(createUpdateGlobalAction(initialState));
 			});
 		return swaggerClient;
 	});

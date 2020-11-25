@@ -23,7 +23,6 @@ This project requires node version >=12.14.0 <13.
 ```bash
 npm i -g @workmarket/hunk
 ```
-Are there any additional pre-requisites that developers need to perform in order to contribute to this project?
 
 ## Commands
 
@@ -31,11 +30,8 @@ Are there any additional pre-requisites that developers need to perform in order
 * `hunk credentials init` - to create credentials.js
 * `hunk serve` - to run the app
 * `hunk lint` - to run eslint
-* `hunk test` - to run unit tests with coverage
-* `hunk test --no-coverage` - to run unit tests without checking coverage
-
-Provide a list of additional commands that a developer should know about - `make lint`, `make start`, etc.
-
+* `hunk test --use-typescript` - to run unit tests with coverage
+* `hunk test --use-typescript --no-coverage` - to run unit tests without checking coverage
 
 ## Publishing
 

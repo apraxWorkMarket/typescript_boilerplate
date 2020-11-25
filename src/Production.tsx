@@ -1,18 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import ConnectedApp from './App';
 import Loader from './react/components/Loader';
 import SwaggerClient from './api/types/SwaggerClient';
 import { State } from './redux/state';
-import store from './redux';
 
 /* eslint-disable react/no-did-update-set-state */
 /* eslint-disable react/forbid-prop-types */
 
 interface ComponentProps {
   apiClient: SwaggerClient;
-  store: typeof store;
+  store: any,
 }
 
 interface ReduxState {
@@ -56,7 +54,7 @@ class ProductionContainer extends React.Component<ComponentProps & ReduxState, L
 
 const mapStateToProps = (state: State) => {
   return {
-    isLoading: state.Global!.get('isPerformingInitialLoad') as boolean,
+    isLoading: Boolean(state.Global!.get('isPerformingInitialLoad') && (state.Global!.get('swaggerClient') as SwaggerClient).execute),
   };
 };
 

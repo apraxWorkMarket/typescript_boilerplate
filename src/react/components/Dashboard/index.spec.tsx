@@ -8,16 +8,16 @@ import Dashboard, {DispatchProps} from '.';
 import { fromJS, List, Map } from 'immutable';
 
 describe('Dashboard', () => {
-	let props: State["bootstrap_4_1_1"]["Settings"] & DispatchProps;
-	let mockStore: State["bootstrap_4_1_1"];
+	let props: State["typescript_boilerplate"]["Settings"] & DispatchProps;
+	let mockStore: State["typescript_boilerplate"];
 	let store: MockStore<unknown>;
 	beforeEach(() => {
 		props = {
-      initialize: jest.fn<any, any>(),
-      columns: [
-        Map({fixed: true})
-      ],
-      dataList: List([Map({mockKey: 'mockValue'})]),
+			initialize: jest.fn<any, any>(),
+			columns: [
+				Map({ fixed: true })
+			],
+			dataList: List([Map({ mockKey: 'mockValue' })]),
 		};
 		mockStore = initialState;
 		store = configureMockStore<unknown>()(mockStore);

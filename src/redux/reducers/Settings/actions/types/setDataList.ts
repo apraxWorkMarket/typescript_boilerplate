@@ -1,5 +1,5 @@
 import { Action, ActionCreator } from 'redux';
-import CONSTANTS from '../constants';
+import CONSTANTS from '../../../../constants';
 
 
 // TODO(aprax) fix Any

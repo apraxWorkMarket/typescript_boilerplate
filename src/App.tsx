@@ -1,8 +1,9 @@
 import React from 'react';
 import Dashboard from './react/components/Dashboard';
 import PageHeader from './react/components/PageHeader';
+import Counter from './react/components/Counter';
 
-export default () => (
+const App = () => (
 	<div
 		style={ {
 			display: 'flex',
@@ -15,6 +16,8 @@ export default () => (
 		} }
 	>
 		<PageHeader />
+		<Counter />
 		<Dashboard />
 	</div>
 );
+export default App;

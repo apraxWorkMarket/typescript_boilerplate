@@ -1,16 +1,16 @@
 {
-	"name": "@workmarket/spa-bootstrap_4_1_1",
+	"name": "@workmarket/typescript_boilerplate",
 	"version": "0.0.0",
 	"description": "",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/workmarket/spa-bootstrap_4_1_1.git"
+		"url": "git+https://github.com/workmarket/typescript_boilerplate.git"
 	},
 	"license": "UNLICENSED",
 	"bugs": {
-		"url": "https://github.com/workmarket/spa-bootstrap_4_1_1/issues"
+		"url": "https://github.com/workmarket/typescript_boilerplate/issues"
 	},
-	"homepage": "https://github.com/workmarket/spa-bootstrap_4_1_1#readme",
+	"homepage": "https://github.com/workmarket/typescript_boilerplate#readme",
 	"engines": {
 		"node": ">=12.14.0 <13"
 	},
@@ -18,13 +18,13 @@
 		"dist",
 		"dist-es"
 	],
-	"main": "dist/index.js",
-	"module": "dist-es/index.js",
-	"jsnext:main": "dist-es/index.js",
+	"main": "dist/bundle.js",
+	"module": "dist-es/bundle.js",
+	"jsnext:main": "dist-es/bundle.js",
 	"peerDependencies": {
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
-		"redux": "3.7.2"
+		"redux": "4.0.3"
 	},
 	"devDependencies": {
 		"@babel/plugin-proposal-class-properties": "7.12.1",
@@ -70,6 +70,7 @@
 		"@workmarket/theme-provider": "1.2.2",
 		"babel-jest": "26.6.3",
 		"immutable": "3.8.2",
+		"redux-saga": "1.1.3",
 		"swagger-client": "3.9.1",
 		"ts-jest": "26.4.4",
 		"typescript": "4.0.5"

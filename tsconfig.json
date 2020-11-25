@@ -20,6 +20,6 @@
     "sourceMap": true
   },
   "include": [
-    "src"
+    "src", "dev/redux/thunks", "dev/redux/Global"
   ]
 }

@@ -1,13 +1,14 @@
 import reducer from './redux/reducers';
-// import store from './redux';
 import Production from './Production';
 
-const name = 'bootstrap_4_1_1';
+const name = 'Typescript Boilerplate';
 
 export { name, reducer, Production as container };
+export const MyNinjaLord = "PirateBeef";
 
 export default () => ({
 	name,
+	pageTitle: 'asdf',
 	container: Production,
 	reducer,
 });

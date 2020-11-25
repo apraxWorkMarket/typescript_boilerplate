@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
-import SwaggerClient from '../../api/types/SwaggerClient';
-import { State } from '../state';
-import setDataList, { SetDataListActionType } from './setDataList';
+import SwaggerClient from '../../../src/api/types/SwaggerClient';
+import { State } from '../../../src/redux/state';
+import setDataList, { SetDataListActionType } from '../../../src/redux/reducers/Settings/actions/types/setDataList';
 
 const initialFetch = () => async (dispatch: Dispatch<SetDataListActionType, State>,  getState: () => State) => {
 	const fullState = getState();

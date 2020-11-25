@@ -13,7 +13,7 @@ import reducer from './redux/reducers';
 
 const store = createStore(
 	combineReducers({
-		bootstrap_4_1_1: reducer,
+		typescript_boilerplate: reducer,
 		Global: (state = Map({})) => {
 			return state;
 		},

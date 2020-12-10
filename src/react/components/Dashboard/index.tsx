@@ -37,6 +37,8 @@ class Dashboard extends Component<State["typescript_boilerplate"]["Settings"] & 
 }
 
 const mapStateToProps = (state: State) => {
+	debugger;
+	console.info(state);
 	const { columns, dataList } = state.typescript_boilerplate.Settings;
 	return {
 		columns,
